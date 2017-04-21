@@ -49,12 +49,14 @@ const update_favicon = () => {
         ctx.fillStyle = states[state];
         ctx.fillRect(0,0,16,16);
 
-        // Grab the first letter from the state and use it in the icon
+        // Draw the appropriate icon
         ctx.fillStyle = '#fff';
-        ctx.font = 'bold 14px sans-serif';
-        ctx.fillText(state.charAt(0).toUpperCase(), 3, 13);
+        let path = new Path2D('M11 11.3V5c0-.8-.3-1.5-1-2-.5-.6-1.2-1-2-1H7V0L4 3l3 3V4h1c.3 0 .5 0 .7.3.2.2.3.4.3.7v6.3c-.6.3-1 1-1 1.7 0 1 1 2 2 2s2-1 2-2c0-.7-.4-1.4-1-1.7zm-1 3c-.7 0-1.2-.7-1.2-1.3 0-.7.5-1.2 1.2-1.2s1.2.5 1.2 1.2-.5 1.2-1.2 1.2zM4 3c0-1-1-2-2-2S0 2 0 3c0 .7.4 1.4 1 1.7v6.6c-.6.3-1 1-1 1.7 0 1 1 2 2 2s2-1 2-2c0-.7-.4-1.4-1-1.7V4.7c.6-.3 1-1 1-1.7zm-.8 10c0 .7-.6 1.2-1.2 1.2S.8 13.7.8 13s.6-1.2 1.2-1.2 1.2.5 1.2 1.2zM2 4.2C1.3 4.2.8 3.6.8 3S1.4 1.8 2 1.8s1.2.6 1.2 1.2S2.6 4.2 2 4.2z');
+        ctx.translate(2, 0);
+        ctx.fill(path, 'evenodd');
+        ctx.translate(-2, 0);
 
-        document.querySelector('head link[rel="icon"]').href = canvas.toDataURL('image/x-icon');
+        document.querySelector('head link[rel="icon"]').href = canvas.toDataURL('image/png');
       }
     } else {
       reset_favicon();
