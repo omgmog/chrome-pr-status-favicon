@@ -35,6 +35,7 @@ const update_favicon = () => {
           'clean': '#31BE4E',
           'error': '#d73a49',
           'unknown': '#dbab09',
+          'unstable': '#dbab09',
           'merged': '#6f42c1',
           'dirty': '#6a737d'
         };
