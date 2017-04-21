@@ -1,0 +1,11 @@
+{
+  "name": "Github PR Status in Favicon",
+  "version": "0.1",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*/pull/*"],
+      "js": ["client.js"]
+    }
+  ]
+}
