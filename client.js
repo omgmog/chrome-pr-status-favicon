@@ -6,6 +6,19 @@ const reset_favicon = () => {
   document.querySelector('head link[rel="icon"]').href = 'https://assets-cdn.github.com/favicon.ico';
   previous_state = '';
 }
+// Rounded rectangles
+CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
+  if (w < 2 * r) r = w / 2;
+  if (h < 2 * r) r = h / 2;
+  this.beginPath();
+  this.moveTo(x+r, y);
+  this.arcTo(x+w, y,   x+w, y+h, r);
+  this.arcTo(x+w, y+h, x,   y+h, r);
+  this.arcTo(x,   y+h, x,   y,   r);
+  this.arcTo(x,   y,   x+w, y,   r);
+  this.closePath();
+  return this;
+}
 
 const update_favicon = () => {
   let state_element = document.querySelectorAll('.branch-action')[0];
@@ -47,7 +60,17 @@ const update_favicon = () => {
 
         // Use the state color for the background
         ctx.fillStyle = states[state];
-        ctx.fillRect(0,0,16,16);
+        ctx.roundRect(0,0,ctx.canvas.width,ctx.canvas.height,2);
+        ctx.fill();
+
+        // gradient
+        let grad = ctx.createLinearGradient(0,0,0,ctx.canvas.height);
+        grad.addColorStop(0, 'rgba(0,0,0,0)');
+        grad.addColorStop(1, 'rgba(0,0,0,.15)');
+        ctx.fillStyle = grad;
+        ctx.roundRect(0,0,ctx.canvas.width,ctx.canvas.height,2);
+        ctx.fill();
+
 
         // Draw the appropriate icon
         ctx.fillStyle = '#fff';
